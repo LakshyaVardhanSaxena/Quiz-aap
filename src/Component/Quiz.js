@@ -63,7 +63,7 @@ export default function Quiz() {
             options: ["First", "Second", "Third", "Fourth"],
             answer: "Second",
         },
-    ];
+    
 
     ]
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
