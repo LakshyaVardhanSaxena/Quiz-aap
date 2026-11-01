@@ -17,8 +17,12 @@ export default function Quiz() {
     ]
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [currentAnswer, setCurrentAnswer] = useState(null);
+    const [score, setScore] = useState(0);
     const handleClick = (option) => {
         setCurrentAnswer(option)
+        if(option === questions[currentQuestionIndex].answer){
+            setScore(score+1)
+        }
     }
     const handleNextQuestion = () => {
         setCurrentQuestionIndex(currentQuestionIndex + 1);
@@ -34,7 +38,7 @@ export default function Quiz() {
                         'button-disable' : 'button'} onClick={handleNextQuestion}>Next Question
                         </button>
 
-                </div> : ''
+                </div> : <div> You Score is {score} </div>
             }
 
 
