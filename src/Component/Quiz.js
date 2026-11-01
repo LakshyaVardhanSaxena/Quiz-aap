@@ -1,5 +1,6 @@
-import React from 'react'
-
+import React, { useOptimistic, useState } from 'react'
+import QuestionList from './QuestionList'
+import QuizCSS from './Quiz.css'
 export default function Quiz() {
     const questions = [
         {
@@ -14,8 +15,31 @@ export default function Quiz() {
         },
 
     ]
-
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+    const [currentAnswer, setCurrentAnswer] = useState(null);
+    const handleClick = (option) => {
+        setCurrentAnswer(option)
+    }
+    const handleNextQuestion = () => {
+        setCurrentQuestionIndex(currentQuestionIndex + 1);
+        setCurrentAnswer(null);
+    }
     return (
-        <div>What is React?</div>
+        <div>
+            {currentQuestionIndex < questions.length ?
+                <div>
+                    <QuestionList question={questions[currentQuestionIndex].question}
+                        options={questions[currentQuestionIndex].options} handleClick={handleClick} currentAnswer={currentAnswer} />
+                    <button disabled={currentAnswer === null} className={currentAnswer === null ? 
+                        'button-disable' : 'button'} onClick={handleNextQuestion}>Next Question
+                        </button>
+
+                </div> : ''
+            }
+
+
+
+
+        </div>
     )
 }
